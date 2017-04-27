@@ -1,0 +1,62 @@
+.brand-fr-color() {
+	color: @brand-color;
+}
+
+.brand-bg-color() {
+	background-color: @brand-color;
+}
+
+.text-color() {
+	color: @text-color;
+}
+
+.text-shadow() {
+	text-shadow: 0 1px rgba(0,0,0,.4);
+}
+
+.divider-line() {
+	border-top: 1px solid rgba(0,0,0,.7);
+	border-bottom: 1px solid rgba(255,255,255,.1);
+//	height: 2px;
+}
+
+.heading {
+	font-size: 2.2em; //22px
+	font-weight: normal;
+	.text-shadow();
+}
+
+::-moz-selection {
+	.brand-bg-color();
+}
+
+::selection {
+	.brand-bg-color();
+}
+
+.brand-fr-color {
+	.brand-fr-color();
+}
+
+.mt {
+	margin-top: unit(80/10, em); // 80px
+}
+
+.pb {
+	padding-bottom: unit(35/10, em); // 35px;
+}
+
+.border-bottom-after:after {
+	content: '';
+	display: block;
+	.divider-line();
+	margin-top: unit(18/22, em); //22/18px
+}
+
+.quote {
+	display: block;
+	.brand-fr-color();
+	font-style: italic;
+	font-size: 1.8em;
+	margin: 1em unit(27/18,em);
+}

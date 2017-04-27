@@ -1,0 +1,23 @@
+.to-top-container {
+	position: relative;
+	height: 0px;
+	overflow: visible;
+}
+.to-top {
+	font-size: unit(16/10, em); //11px
+	display: inline-block;
+	float: right;
+	position: relative;
+	z-index: 2;
+	top: -.35em;
+	right: 0;
+	
+	color: @brand-color;
+	font-weight: bold;
+	
+	
+	&:hover,
+	&:focus {
+		text-shadow: 0 0 8px @brand-color;
+	}
+}

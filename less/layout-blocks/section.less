@@ -1,0 +1,41 @@
+.section {
+
+	//.mt();
+
+	&__head {
+//		display: inline-block;
+//		line-height: 1.1;
+		overflow: hidden;
+		position: relative;
+		padding-left: unit(70/22, em);
+		margin-bottom: unit(35/22, em); //35px
+		
+		& span:before {
+			content: '.';
+			display: inline-block;
+		}
+		
+		&:before, &:after {
+			content: '';
+			display: inline-block;
+			vertical-align: middle;
+			width: 100%;
+			.divider-line();
+			position: relative;
+		}
+
+		&:before {
+			right: 15px;
+			margin: 0 0 0 -100%;
+		}
+		&:after {
+			left: 15px;
+			margin: 0 -100% 0 0;
+		}
+	}
+
+	&__details p {
+		margin-bottom: unit(18/10, em);
+	}
+
+}

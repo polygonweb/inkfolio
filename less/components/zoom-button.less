@@ -1,0 +1,50 @@
+.zoom-button {
+	display: inline-block;
+	
+	position: absolute;
+	z-index: 2;
+	@w: 18px;
+	@h: 18px;
+	top: -@w/2 + 4px;
+	right:  -@h/2 + 4px;
+	
+	font-size: 1.1em; // 11px
+	font-family: Arial, sans-serif;
+	
+	width:  @w; // 18px
+	height: @h; //18px
+	line-height: @h;
+	text-align: center;
+	
+	font-weight: bold;
+	border-radius: 50%;
+	
+	color: #1f1f1f;
+	background-color: #f9f9f9; // layer fill content
+	
+	-webkit-box-shadow:
+		0 0 0 3px rgba(255,255,255,.14), // stroke
+		0 0 6px rgba(0,0,0,.04), // outer glow
+		inset 0 5px 5px rgba(255,255,255,.06), //inner shadow 
+		inset 0 0 8px rgba(0,0,0,.08); // inner glow
+	-moz-box-shadow:
+		0 0 0 3px rgba(255,255,255,.14), // stroke
+		0 0 6px rgba(0,0,0,.04), // outer glow
+		inset 0 5px 5px rgba(255,255,255,.06), //inner shadow 
+		inset 0 0 8px rgba(0,0,0,.08); // inner glow
+	box-shadow:
+		0 0 0 3px rgba(255,255,255,.14), // stroke
+		0 0 6px rgba(0,0,0,.04), // outer glow
+		inset 0 5px 5px rgba(255,255,255,.06), //inner shadow 
+		inset 0 0 8px rgba(0,0,0,.08); // inner glow
+	
+	&:before {
+		content: '+';
+		text-shadow:
+			0 0 1px rgba(0,0,0,1);
+	}
+	
+	&:hover {
+		.brand-bg-color();
+	}
+}

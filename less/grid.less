@@ -1,0 +1,194 @@
+//
+// Float-Based Grid System
+//
+
+
+// varibles
+
+@font-base: 10; //10; // base font size in px
+
+@cols: 12; // number of columns
+
+@pad: 20; //main padding number in px
+
+@padd-left: unit(@pad/@font-base, em);
+@padd-right: unit(@pad/@font-base, em);
+@padd-top: unit(@pad/@font-base, em);
+@padd-bottom: unit(@pad/@font-base, em); 
+
+@screen-names-list: xs, sm, md, lg;
+@screen-sizes-list: 520, 808, 1020; // screen sizes in px
+
+//@max-width: unit(extract(@screen-sizes-list, length(@screen-sizes-list))/@font-base, em);
+@max-width: 102em;
+
+
+// mixins
+.box-sizing(@box-model) {
+	-webkit-box-sizing: @box-model;
+	   -moz-box-sizing: @box-model;
+			box-sizing: @box-model;	
+}
+
+
+.clearfix() {
+	&:before, &:after {
+		content: "";
+		display: table;
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+
+.row() {
+	.clearfix();
+	margin-left: -@padd-left;
+	margin-right: -@padd-right;
+}
+
+.row--pad() {
+	.clearfix();
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.col--center() {
+	.clearfix();
+	float: none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+// make columns
+.cols(@i: 1; @cols: 12; @prefix) when (@i <= @cols) {
+	.col--@{prefix}-@{i}-@{cols} { width: percentage(@i/@cols); }
+
+	.cols(@i + 1; @cols; @prefix);
+}
+
+// make offsets
+.offsets(@i: 0; @cols: 12; @prefix) when (@i <= @cols) {
+	.col--@{prefix}-@{i}-@{cols}-left { margin-left: percentage(@i/@cols); }
+
+	.col--@{prefix}-@{i}-@{cols}-right { margin-right: percentage(@i/@cols); }
+
+	.offsets(@i + 1; @cols; @prefix);
+}
+
+// make push and pulls
+.pushpulls(@i: 0; @cols: 12; @prefix) when (@i <= @cols) {
+	.col--@{prefix}-@{i}-@{cols}-push { left: percentage(@i/@cols);	}
+
+	.col--@{prefix}-@{i}-@{cols}-pull { right: percentage(@i/@cols); }
+
+	.pushpulls(@i + 1; @cols; @prefix);
+}
+
+
+// columns for one screen
+.columns(@cols: 12; @prefix) {
+	[class*='col--@{prefix}-'] {
+		float: left;
+	}
+	[class*='col--@{prefix}-'][class*="--center"] {
+		.col--center();
+	}
+	.cols(@i: 1; @cols: 12; @prefix);
+	.offsets(@i: 0; @cols: 12; @prefix);
+	.pushpulls(@i: 0; @cols: 12; @prefix);
+}
+
+
+//columns with media queries
+.media-columns(@cols: 12; @screen-sizes-list; @screen-names-list; @index) when (@index = 1) {
+
+	.columns(@cols: 12; extract(@screen-names-list, @index));
+
+}
+
+.media-columns(@cols: 12; @screen-sizes-list; @screen-names-list; @index) when (@index > 1) {
+
+	@media (min-width: unit( ((extract(@screen-sizes-list, @index - 1))/16), em) ) {
+		.columns(@cols; extract(@screen-names-list, @index));
+	}
+	
+}
+
+
+.make-media-columns(@cols: 12; @screen-sizes-list; @screen-names-list; @index: 1) when (@index <= length(@screen-names-list)){
+
+	.media-columns(@cols; @screen-sizes-list; @screen-names-list; @index);
+	.make-media-columns(@cols: 12; @screen-sizes-list; @screen-names-list; @index + 1);
+
+}
+
+
+// main code
+
+*,
+*:before,
+*:after {
+	.box-sizing(border-box);
+}
+
+
+.container,
+.container--fluid {
+	.clearfix();
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: @padd-left;
+	padding-right: @padd-right;
+}
+
+.container--fluid {
+	max-width: @max-width;
+}
+
+
+.row {
+	.row();
+}
+
+.row--pad {
+	.row--pad();
+}
+
+
+[class*='col--'] {
+  position: relative;
+  padding-left: @padd-left;
+  padding-right: @padd-right;
+}
+
+
+//.columns(@cols; extract(@screen-names-list, 1));
+
+
+// @screen: extract(@screen-sizes-list, 1);
+// @size: (@screen/@font-base);
+// @screen-size: unit( @size, em );
+
+
+// @media (min-width: unit((extract(@screen-sizes-list, 1)/@font-base), em )) {
+
+// 	.columns(@cols; extract(@screen-names-list, 2));
+
+// }
+
+// @media (min-width: unit((extract(@screen-sizes-list, 2)/@font-base), em )) {
+
+// 	.columns(@cols; extract(@screen-names-list, 3));
+
+// }
+
+// @media (min-width: unit((extract(@screen-sizes-list, 3)/@font-base), em )) {
+
+// 	.columns(@cols; extract(@screen-names-list, 4));
+
+// }
+
+.make-media-columns(@cols; @screen-sizes-list; @screen-names-list; 1);

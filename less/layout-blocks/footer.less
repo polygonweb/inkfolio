@@ -1,0 +1,59 @@
+.footer {	
+//	.mt();
+	
+	background-color: #272727;
+	background-image: linear-gradient(~"rgba(0,0,0,.15), rgba(255,255,.15)");
+	
+	p {
+		font-size: 1.3em;
+		margin-bottom: 1.5em;
+	}
+	
+	ul {
+		font-size: 1.3em;
+		color: @brand-color;
+		list-style-type: disc;
+		list-style-position: inside;
+		
+		li {
+			margin-bottom: unit(18/13, em);
+		}
+	}
+	
+	a {
+		font-style: italic;
+		color: @brand-color;
+		&:hover {
+			text-decoration: underline;
+		}
+	} 	
+	
+	&:before {
+		content: '';
+		background: #303030 url("/../../theme-img/footer-stich.png") repeat-x 0 0;
+		display: block;
+		height: 58px;
+		margin-bottom: 2.3em; //23px
+	}
+	
+	&__col {
+		margin-bottom: unit(60/10, em);
+		
+		&__head {
+			font-size: 1.2em;
+			text-transform: uppercase;
+			font-weight: normal;
+			.brand-fr-color();
+			margin-bottom: 2.2em;
+		}
+	}
+	
+	&__copy {
+		font-size: 1.3em;
+//		margin-top: unit(60/13, em);
+		padding-bottom: unit(27/13, em);
+		text-align: center;
+		color:@brand-color;
+		.text-shadow();
+	}
+}
